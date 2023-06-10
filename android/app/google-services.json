@@ -1,0 +1,334 @@
+{
+  "project_info": {
+    "project_number": "224601867964",
+    "project_id": "jewellerysip",
+    "storage_bucket": "jewellerysip.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:07d9d8851fa8d5579632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.bmj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:dc60f7d824f9203b9632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.jeweller_sip_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:c9442001e44fb17f9632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.jlTest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:f06a980e0721a7de9632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.mahaveer_jewellers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:39d9a0e41f3f12f49632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.rajesh_jewellers_kolar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:45cde564088cdf519632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.sumangali_jewellers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:edc68421fb762b579632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.sumangali_jewellers7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:bfce737d8c5fd4d59632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jewellersip.vishal_thanga_maligai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224601867964:android:f04012f0a5768f669632b9",
+        "android_client_info": {
+          "package_name": "com.smj.jladmin_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRke603DSwI_Ro8CBrzr__ikKm7nI0nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224601867964-76i1mbbmbqgvfl75b5v0hj1ng7s2tkoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224601867964-2dt2ru0t6rvsc85q1kihgstnun366v7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smj.jewellersip.rajesh-jewellers"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
