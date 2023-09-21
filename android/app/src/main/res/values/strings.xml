@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_notification_channel_id" translatable="false">"fcm_default_channel"</string>
+    <string name="branch_io_sdk_test_key">key_test_lAdxlwRsRWwa2KfAin0yrfodEClZ1wj5</string>
+    <string name="branch_io_sdk_live_key">key_live_otbBaERBJ5BkZSoBdgWErbmkCsc7YzmH</string>
+    <string name="branch_link_scheme">jewelleradmin</string>
+<!--    <string name="link_main_scheme">jewellers-admin.test-app.link</string>-->
+<!--    <string name="alternative_link_scheme">jewellers-admin-alternate.test-app.link</string>-->
+    <string name="link_main_scheme">jewellers-admin.app.link</string>
+    <string name="alternative_link_scheme">jewellers-admin-alternate.app.link</string>
+</resources>

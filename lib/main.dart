@@ -1,26 +1,20 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:get/get.dart';
 import 'component/home.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-
   runApp(SplashApp());
 }
+
 class SplashApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Splash Screen',
+      title: 'Jewellers.Live',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -33,8 +27,12 @@ class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
+
 class _SplashScreenState extends State<SplashScreen> {
   bool _isLoading = true;
+  String? url = kReleaseMode
+      ? "https://admin.jewellers.live/"
+      : "https://sipadmin.1ounce.in/";
 
   @override
   void initState() {
@@ -44,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> loadWebView() async {
     // Simulate a delay before loading the web view
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 500));
 
     setState(() {
       _isLoading = false;
@@ -55,16 +53,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return _isLoading
         ? Scaffold(
-
-      body: Center(
-
-
-        child:Image.asset("assets/images/jlb.png", width: 250,
-          height: 250),
-      ),
-    )
-        : MyApp(); // Replace with your Home class or widget
+            body: Center(
+              child:
+                  Image.asset("assets/images/jlb.png", width: 250, height: 250),
+            ),
+          )
+        : MyHomePage(initialUrl: url); // Replace with your Home class or widget
   }
 }
-
-
