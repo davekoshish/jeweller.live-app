@@ -106,17 +106,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     shouldOverrideUrlLoading:
                         (controller, navigationAction) async {
                       var uri = navigationAction.request.url!;
-                      // if (![
-                      //   "http",
-                      //   "https",
-                      //   "file",
-                      //   "chrome",
-                      //   "data",
-                      //   "javascript",
-                      //   "about"
-                      // ].contains(uri.scheme)) {
-                      //   return NavigationActionPolicy.CANCEL;
-                      // }
+                      if (![
+                        "http",
+                        "https",
+                        "file",
+                        "chrome",
+                        "data",
+                        "javascript",
+                        "about"
+                      ].contains(uri.scheme)) {
+                        return NavigationActionPolicy.CANCEL;
+                      }
                     },
                     onLoadStop: (controller, url) async {
                       // pullToRefreshController.endRefreshing();

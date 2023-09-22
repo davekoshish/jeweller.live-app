@@ -6,8 +6,6 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:jewellers-admin.test-app.link</string>
-		<string>applinks:jewellers-admin-alternate.test-app.link</string>
 		<string>applinks:jewellers-admin.app.link</string>
 		<string>applinks:jewellers-admin-alternate.app.link</string>
 	</array>
