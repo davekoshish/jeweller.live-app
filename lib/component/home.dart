@@ -1,7 +1,4 @@
-import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -32,8 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    initBranchLinks();
     super.initState();
+    initBranchLinks();
     // pullToRefreshController = PullToRefreshController(
     //   options: PullToRefreshOptions(
     //     color: Colors.blue,
@@ -312,11 +309,11 @@ class _MyHomePageState extends State<MyHomePage> {
     prefs.setString('shop_id', shop_id);
     debugPrint('prefs ${prefs.getString('shop_id')}');
   }
-  void sendToFirebase(String shop_id) {
-    Firebase.initializeApp();
 
+  void sendToFirebase(String shop_id) async {
+    await Firebase.initializeApp();
     configureFirebaseMessaging();
-    subscribeToTopic("shop_admin_${shop_id}");
+    subscribeToTopic("shop_admin_$shop_id");
   }
 
   void subscribeToTopic(String topicName) async {

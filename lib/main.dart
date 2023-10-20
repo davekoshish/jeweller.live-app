@@ -1,15 +1,31 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'component/home.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  // debugPrint('Handling a background message ${message.data}');
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(SplashApp());
+  await Firebase.initializeApp();
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  runApp(const SplashApp());
 }
 
 class SplashApp extends StatelessWidget {
+  const SplashApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -18,21 +34,21 @@ class SplashApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _isLoading = true;
-  String? url = kReleaseMode
-      ? "https://admin.jewellers.live/"
-      : "https://sipadmin.1ounce.in/";
+  String? url;
 
   @override
   void initState() {
@@ -46,6 +62,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     setState(() {
       _isLoading = false;
+      url = kReleaseMode
+          ? "https://admin.jewellers.live/"
+          : "https://admin.jewellers.live/";
     });
   }
 
