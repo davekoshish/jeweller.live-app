@@ -135,9 +135,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         this.progress = progress / 100;
                       });
                     },
-                    onUpdateVisitedHistory: (controller, url, androidIsReload) {
-
-                    },
+                    onUpdateVisitedHistory:
+                        (controller, url, androidIsReload) {},
                     onConsoleMessage: (controller, consoleMessage) {
                       try {
                         debugPrint(
@@ -248,47 +247,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void initBranchLinks() async {
     try {
       url = widget.initialUrl;
-      FlutterBranchSdk.initSession().listen((data) async {
+      FlutterBranchSdk.listSession().listen((data) async {
         debugPrint('Branch data: $data');
         if (data.containsKey("+clicked_branch_link") &&
             data["+clicked_branch_link"] == true) {
           debugPrint('Custom string: ${data['~campaign']} ${data['~channel']}');
           if (data.containsKey('jewellery_id')) {
-            debugPrint('jewellery_id ${data['jewellery_id']}');
-            var redirectUrl = kReleaseMode
-                ? "https://admin.jewellers.live/#/dashboard/mobile_estimation"
-                : "https://sipadmin.1ounce.in/#/dashboard/mobile_estimation";
-            var jewelleryLink = data['~referring_link'];
-            var shopId = data['shop_id'];
-            SharedPreferences pref = await SharedPreferences.getInstance();
-            var loggedInShopId = pref.getString('shop_id');
-            debugPrint('shopId $loggedInShopId');
-            if(shopId.toString() == loggedInShopId) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Redirecting..'),
-              ));
-              debugPrint('same shop id');
-              setState(() {
-                 url = redirectUrl;
-              });
-              webViewController!.loadUrl(urlRequest: URLRequest(url: Uri.parse(redirectUrl)));
-              await Clipboard.setData(ClipboardData(text: jewelleryLink));
-            }
+            redirectToCreateEstimation(data);
           }
           if (data.containsKey('estimation_id')) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Redirecting..'),
-            ));
-            debugPrint('estimation_id ${data['estimation_id']}');
-            var redirectUrl = kReleaseMode
-                ? "https://admin.jewellers.live/#/view_estimation;estimation_id=${data['estimation_id']}"
-                : "https://sipadmin.1ounce.in/#/view_estimation;estimation_id=${data['estimation_id']}";
-            var jewelleryLink = data['~referring_link'];
-            var shopId = data['shop_id'];
-            setState(() {
-              url = redirectUrl;
-            });
-            webViewController!.loadUrl(urlRequest: URLRequest(url: Uri.parse(redirectUrl)));
+            redirectToViewEstimation(data);
           }
         } else {
           debugPrint('Initial url: ${widget.initialUrl}');
@@ -303,6 +271,7 @@ class _MyHomePageState extends State<MyHomePage> {
       debugPrint('excep $e');
     }
   }
+
   saveShopId(String shop_id) async {
     debugPrint('shop_id $shop_id');
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -319,6 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void subscribeToTopic(String topicName) async {
     await FirebaseMessaging.instance.subscribeToTopic(topicName);
   }
+
   void unSubscribeToTopic(String topicName) async {
     await FirebaseMessaging.instance.unsubscribeFromTopic(topicName);
   }
@@ -330,5 +300,48 @@ class _MyHomePageState extends State<MyHomePage> {
   void clearShopFromSharePref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove('shop_id');
+  }
+
+  void redirectToViewEstimation(Map data) {
+    showRedirectMessage();
+    debugPrint('estimation_id ${data['estimation_id']}');
+    var redirectUrl = kReleaseMode
+        ? "https://admin.jewellers.live/#/view_estimation;estimation_id=${data['estimation_id']}"
+        : "https://sipadmin.1ounce.in/#/view_estimation;estimation_id=${data['estimation_id']}";
+    var jewelleryLink = data['~referring_link'];
+    var shopId = data['shop_id'];
+    setState(() {
+      url = redirectUrl;
+    });
+    webViewController!
+        .loadUrl(urlRequest: URLRequest(url: Uri.parse(redirectUrl)));
+  }
+
+  void redirectToCreateEstimation(Map data) async {
+    debugPrint('jewellery_id ${data['jewellery_id']}');
+    var redirectUrl = kReleaseMode
+        ? "https://admin.jewellers.live/#/dashboard/mobile_estimation?jewellery_id=${data['jewellery_id']}&link=${data['~referring_link']}"
+        : "https://sipadmin.1ounce.in/#/dashboard/mobile_estimation;jewellery_id=${data['jewellery_id']}&link=${data['~referring_link']}";
+    var jewelleryLink = data['~referring_link'];
+    var shopId = data['shop_id'];
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var loggedInShopId = pref.getString('shop_id');
+    debugPrint('shopId $loggedInShopId');
+    if (shopId.toString() == loggedInShopId) {
+      showRedirectMessage();
+      debugPrint('same shop id');
+      setState(() {
+        url = redirectUrl;
+      });
+      webViewController!
+          .loadUrl(urlRequest: URLRequest(url: Uri.parse(redirectUrl)));
+      await Clipboard.setData(ClipboardData(text: jewelleryLink));
+    }
+  }
+
+  void showRedirectMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Redirecting..'),
+    ));
   }
 }

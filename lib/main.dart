@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'component/home.dart';
 
@@ -20,6 +21,10 @@ void main() async {
     sound: true,
   );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FlutterBranchSdk.init(
+      useTestKey: kReleaseMode ? false : true,
+      disableTracking: false,
+      enableLogging: kReleaseMode ? true : false);
   runApp(const SplashApp());
 }
 
@@ -64,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
       _isLoading = false;
       url = kReleaseMode
           ? "https://admin.jewellers.live/"
-          : "https://admin.jewellers.live/";
+          : "https://sipadmin.1ounce.in/";
     });
   }
 
