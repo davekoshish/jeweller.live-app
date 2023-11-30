@@ -24,7 +24,7 @@ void main() async {
   FlutterBranchSdk.init(
       useTestKey: kReleaseMode ? false : true,
       disableTracking: false,
-      enableLogging: kReleaseMode ? true : false);
+      enableLogging: kReleaseMode ? false : true);
   runApp(const SplashApp());
 }
 
