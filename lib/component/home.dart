@@ -10,6 +10,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:contacts_service/contacts_service.dart' as contacts_service;
+import 'package:flutter_contacts/flutter_contacts.dart' as flutter_contacts;
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, this.initialUrl}) : super(key: key);
@@ -22,7 +27,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   // late PullToRefreshController pullToRefreshController;
-
+  late Iterable<contacts_service.Contact> allContacts;
+  late Iterable<contacts_service.Contact> displayedContacts;
   double progress = 0;
   int count = 0;
   String? url;
@@ -34,6 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     initBranchLinks();
     super.initState();
+    // _loadContacts();
+
     // pullToRefreshController = PullToRefreshController(
     //   options: PullToRefreshOptions(
     //     color: Colors.blue,
@@ -54,7 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     super.dispose();
   }
-
+  Future<void> _loadContacts() async {
+    allContacts = await contacts_service.ContactsService.getContacts();
+    setState(() {
+      displayedContacts = allContacts;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,10 +105,49 @@ class _MyHomePageState extends State<MyHomePage> {
                     // pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
                       webViewController = controller;
+                      // Add JavaScriptChannel after WebView is created
+                      webViewController?.addJavaScriptHandler(
+                        handlerName: 'ContactChannel',
+                        callback: (args) async  {
+                          // Handle message received from Angular
+                          final message = args[0];
+                          print('Message from Angular: $message');
+                          // You can now process the contact data received from Angular
+                         if(message=='getContact')
+                           {
+                             _pickContact(context);
+                             // Request contact permission
+                             if (await flutter_contacts.FlutterContacts.requestPermission()) {
+                          // Get all contacts (lightly fetched)
+                          List<flutter_contacts.Contact> contacts = await flutter_contacts.FlutterContacts.getContacts();
+                          // Get all contacts (fully fetched)
+                          print("is it working 1:$contacts");
+
+                          contacts = await flutter_contacts.FlutterContacts.getContacts(
+                          withProperties: true, withPhoto: true);
+
+                          // Get contact with specific ID (fully fetched)
+                          // Contact contact = await FlutterContacts.getContact(contacts.first.id);
+
+                          // Insert new contact
+                          print("is it working 2:$contacts");
+                          }
+                             else{
+                               List<flutter_contacts.Contact> contacts = await flutter_contacts.FlutterContacts.getContacts();
+                               // Get all contacts (fully fetched)
+                               print("is it working 1:$contacts");
+                               contacts = await flutter_contacts.FlutterContacts.getContacts(
+                                   withProperties: true, withPhoto: true);
+                             }
+                           }
+                        },
+                      );
+
                     },
                     onLoadStart: (controller, url) {
                       debugPrint('current $url');
                     },
+
                     androidOnPermissionRequest:
                         (controller, origin, resources) async {
                       return PermissionRequestResponse(
@@ -247,6 +299,121 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  void _pickContact(BuildContext context) async {
+    await _loadContacts();
+
+    contacts_service.Contact? selectedContact = await showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Container(
+              padding: EdgeInsets.all(20),
+              height: 1000,
+              child: Column(
+                children: [
+                  TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        displayedContacts = allContacts
+                            .where((contact) {
+                          final displayNameContains = (contact.displayName ?? '')
+                              .toLowerCase()
+                              .contains(value.toLowerCase());
+
+                          final phonesNotEmpty = contact.phones?.isNotEmpty ?? false;
+                          final phoneContains = phonesNotEmpty &&
+                              contact.phones!
+                                  .any((phone) => (phone.value ?? '')
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase()));
+
+                          return displayNameContains || phoneContains;
+                        })
+                            .toList();
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Search Contact',
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Select a Contact',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: displayedContacts.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 5,
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: ListTile(
+                            title: Text(
+                              displayedContacts
+                                  .elementAt(index)
+                                  .displayName ??
+                                  '',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              displayedContacts
+                                  .elementAt(index)
+                                  .phones
+                                  ?.isNotEmpty ?? false
+                                  ? displayedContacts
+                                  .elementAt(index)
+                                  .phones!
+                                  .first
+                                  .value ??
+                                  ''
+                                  : 'No phone number',
+                            ),
+                            onTap: () {
+                              Navigator.pop(
+                                  context, displayedContacts.elementAt(index));
+                              _showContactSelectedToast(
+                                  displayedContacts.elementAt(index));
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    if (selectedContact != null) {
+      print('Selected Contact: ${selectedContact.displayName}');
+      // Handle the selected contact as needed
+    } else {
+      print('No contact selected');
+    }
+  }
+
+  void _showContactSelectedToast(contacts_service.Contact contact) {
+    Fluttertoast.showToast(
+      msg: 'Selected Contact: ${contact.displayName}',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+    );
+  }
 
   void initBranchLinks() async {
     try {
@@ -333,5 +500,24 @@ class _MyHomePageState extends State<MyHomePage> {
   void clearShopFromSharePref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove('shop_id');
+  }
+  Future<void> _processContactData(String contactData) async {
+    // Process the contact data, e.g., send it to Angular
+    webViewController?.evaluateJavascript(
+      source: 'processContactData($contactData)',
+    );
+  }
+}
+class ContactPicker {
+  static const MethodChannel _channel = MethodChannel('contact_picker');
+
+  static Future<Map<String, dynamic>> openContactsPicker() async {
+    try {
+      final result = await _channel.invokeMapMethod<String, dynamic>('openContactsPicker');
+      return result ?? {};
+    } catch (e) {
+      print('Error opening contacts picker: $e');
+      return {};
+    }
   }
 }
